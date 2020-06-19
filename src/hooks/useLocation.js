@@ -24,7 +24,7 @@ export default (shouldTrack, callback) => {
     useEffect(() => {
         shouldTrack ? startWatching() :
             subscriber ? subscriber.remove() : null;
-    }, [shouldTrack]);
+    }, [shouldTrack, callback]); // don't use normal function (otherwise it renders multiple time) but useCallback
 
     return [err];
 };
