@@ -5,6 +5,7 @@ import { Text } from 'react-native-elements';
 import Map from '../components/Map';
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
+import TrackForm from '../components/TrackForm';
 // import '../_mockLocation';
 
 const TrackCreateScreen = ({ isFocused }) => {
@@ -15,8 +16,8 @@ const TrackCreateScreen = ({ isFocused }) => {
         <SafeAreaView forceInset={{ top: "always" }}>
             <Text h3>Create a Track</Text>
             <Map />
-            {/* <NavigationEvents onWillBlur={() => { console.log('blur') }} /> */}
             {err ? <Text>Please enable your location</Text> : null}
+            <TrackForm/>
         </SafeAreaView>
     );
 };
