@@ -1,0 +1,19 @@
+npm install react-navigation
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install react-navigation-stack @react-native-community/masked-view
+npm install react-navigation-tabs
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+npm i react-native-elements
+npm i axios
+npm i -g ngrok
+npm run dev // dev is in script of jsonserver project
+ngrok http 3000 // after runnig serve app - Express
+
+
+npx expo-cli install react-native-maps
+npx expo-cli install expo-location
+
+adb shell pm reset-permissions
