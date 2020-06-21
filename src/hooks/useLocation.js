@@ -4,26 +4,37 @@ import { requestPermissionsAsync, Accuracy, watchPositionAsync } from 'expo-loca
 export default (shouldTrack, callback) => {
     const [err, setErr] = useState(null);
 
-    const [subscriber, setSubscriber] = useState(null);
-    const startWatching = async () => {
-        try {
-            await requestPermissionsAsync();
-            const sub = await watchPositionAsync({
-                accuracy: Accuracy.BestForNavigation,
-                timeInterval: 1000,
-                distanceInterval: 10
-            }, location => {
-                callback(location);
-            });
-            setSubscriber(sub);
-            setSubscriber(null);
-        } catch (err) {
-            setErr(err);
-        }
-    }
     useEffect(() => {
-        shouldTrack ? startWatching() :
-            subscriber ? subscriber.remove() : null;
+        let subscriber;
+        const startWatching = async () => {
+            try {
+                await requestPermissionsAsync();
+                subscriber = await watchPositionAsync({
+                    accuracy: Accuracy.BestForNavigation,
+                    timeInterval: 1000,
+                    distanceInterval: 10
+                }, location => {
+                    callback(location);
+                });
+            } catch (err) {
+                setErr(err);
+            }
+        }
+        if (shouldTrack) {
+            startWatching()
+        } else {
+            if (subscriber) {
+                subscriber.remove();
+            }
+            subscriber = null;
+        }
+
+
+        return () => {
+            if (subscriber) {
+                subscriber.remove();
+            }
+        }
     }, [shouldTrack, callback]); // don't use normal function (otherwise it renders multiple time) but useCallback
 
     return [err];
