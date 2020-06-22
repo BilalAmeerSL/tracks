@@ -26,6 +26,9 @@ const TrackDetailScreen = ({ navigation }) => {
         </View>
     );
 };
+TrackDetailScreen.navigationOptions = {
+    title: 'Tracks'
+}
 const styles = StyleSheet.create({
     map: {
         height: 300
